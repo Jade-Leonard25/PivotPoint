@@ -2,11 +2,11 @@ import '../globals.css'
 import * as React from 'react';
 export const metadata ={
     title:'Dashboard',
-    description:''
+    description:'Official Dashboard of PivotPoint'
 }
 export default function DashboardLayout({children}){
     return(
-        <div>
+        <div className='flex'>
             {children}
         </div>
     )

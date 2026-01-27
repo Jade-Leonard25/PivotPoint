@@ -14,13 +14,13 @@ export default function App() {
                             <FileSpreadsheet className="h-5 w-5" />
                         </div>
                         <div>
-                            <span className="font-bold text-xl text-slate-900">DataForge</span>
+                            <span className="font-bold text-xl text-slate-900">PivotPoint</span>
                             <div className="text-xs text-slate-500 font-medium">CSV Processing</div>
                         </div>
                     </div>
 
                     <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-700">
-                        <Link href="/features" className="hover:text-slate-900 transition-colors font-medium">Features</Link>
+                        <Link href="/dashboard/selection" className="hover:text-slate-900 transition-colors font-medium">Tools</Link>
                         <Link href="/how-it-works" className="hover:text-slate-900 transition-colors font-medium">How it Works</Link>
                         <Link href="/use-cases" className="hover:text-slate-900 transition-colors font-medium">Use Cases</Link>
                         <Link href="/pricing" className="hover:text-slate-900 transition-colors font-medium">Pricing</Link>
@@ -74,7 +74,7 @@ export default function App() {
                             {/* Stats */}
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 w-full max-w-3xl">
                                 <div className="text-center p-6 bg-white rounded-xl shadow-sm border">
-                                    <div className="text-3xl font-bold text-slate-900">50K+</div>
+                                    <div className="text-3xl font-bold text-slate-900">10k+</div>
                                     <div className="text-sm text-slate-600">Files Processed</div>
                                 </div>
                                 <div className="text-center p-6 bg-white rounded-xl shadow-sm border">
@@ -82,7 +82,7 @@ export default function App() {
                                     <div className="text-sm text-slate-600">Uptime</div>
                                 </div>
                                 <div className="text-center p-6 bg-white rounded-xl shadow-sm border">
-                                    <div className="text-3xl font-bold text-slate-900">10GB</div>
+                                    <div className="text-3xl font-bold text-slate-900">5gb</div>
                                     <div className="text-sm text-slate-600">File Size Limit</div>
                                 </div>
                                 <div className="text-center p-6 bg-white rounded-xl shadow-sm border">
@@ -259,13 +259,9 @@ export default function App() {
                             <p className="text-xl text-slate-300">
                                 Join thousands of professionals who have transformed how they work with data.
                             </p>
+
                             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-                                <Button size="lg" className="h-14 px-8 text-lg font-medium bg-white text-slate-900 hover:bg-slate-100 shadow-2xl">
-                                    Start Free Trial
-                                </Button>
-                                <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-2 border-white/30 bg-transparent text-white hover:bg-white/10">
-                                    Schedule a Demo
-                                </Button>
+                                <Button>Sign Up for free account</Button>
                             </div>
                             <div className="flex items-center justify-center gap-6 pt-12 text-sm text-slate-400">
                                 <div className="flex items-center gap-2">
@@ -274,7 +270,7 @@ export default function App() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <CheckCircle2 className="h-4 w-4" />
-                                    14-day free trial
+                                   5mb max limit for free account (25k rows of data csv read)
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <CheckCircle2 className="h-4 w-4" />
