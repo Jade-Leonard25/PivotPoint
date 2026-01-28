@@ -1,7 +1,19 @@
 // lib/firebase.js
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { 
+    getAuth, 
+    GoogleAuthProvider, 
+    GithubAuthProvider,
+    signInWithPopup,
+    signOut
+} from 'firebase/auth';
+import { 
+    getFirestore, 
+    doc, 
+    getDoc, 
+    setDoc, 
+    updateDoc 
+} from 'firebase/firestore';
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your Firebase configuration
@@ -134,7 +146,7 @@ const getCurrentUser = async () => {
 // Helper function to log out
 const logout = async () => {
     try {
-        await auth.signOut();
+        await signOut(auth);
         return true;
     } catch (error) {
         console.error("Logout error:", error);
