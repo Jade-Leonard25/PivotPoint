@@ -1,10 +1,7 @@
 'use client';
 import { z } from 'zod';
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/app/db/settings';
 import { useRouter } from 'next/navigation';
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -16,6 +13,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import axios from 'axios';
 
 // Validation schema
 const signUpSchema = z.object({
@@ -36,44 +34,44 @@ export default function SignUp({ className, searchParams, params, ...props }) {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+  e.preventDefault();
+  setError('');
+  setLoading(true);
 
-    try {
-      // Validate form data
-      const validatedData = signUpSchema.parse({
-        email,
-        password,
-        confirmPassword
-      });
+  try {
+    // Validate with Zod (already perfect)
+    const validatedData = signUpSchema.parse({
+      email,
+      password,
+      confirmPassword
+    });
 
-      // Create user with Firebase
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        validatedData.email,
-        validatedData.password
-      );
-
-      console.log('User created:', userCredential.user);
-      
-      // Redirect to dashboard or home page
-      router.push('/dashboard');
-      
-    } catch (err) {
-      if (err instanceof z.ZodError) {
-        setError(err.errors[0].message);
-      } else if (err.code === 'auth/email-already-in-use') {
-        setError('This email is already registered');
-      } else if (err.code === 'auth/weak-password') {
-        setError('Password is too weak');
-      } else {
-        setError(err.message || 'Failed to create account');
-      }
-    } finally {
-      setLoading(false);
+    // API call ← Fixed: proper axios.post usage
+    const response = await axios.post('/api/register', validatedData);
+    
+    // Store user data (optional)
+    localStorage.setItem('user', JSON.stringify(response.data.user));
+    
+    console.log('User registered:', response.data.user);
+    
+    // Redirect
+    router.push('/dashboard');
+    
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      setError(err.errors[0].message);
+    } else if (axios.isAxiosError(err) && err.response?.status === 409) {
+      setError('This email is already registered');  // Matches API 409
+    } else if (axios.isAxiosError(err) && err.response?.data?.error) {
+      setError(err.response.data.error);  // Matches all API errors
+    } else {
+      setError('Failed to create account');
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
