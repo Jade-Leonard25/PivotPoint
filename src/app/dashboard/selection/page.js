@@ -1,8 +1,10 @@
+'use client'
+import StatisticalComparisonUI from "@/hooks/compare-hook";
 
 export default function Selection(){
     return(
-        <div>
-            <p>selection</p>
+        <div className="p-6 w-full">
+           <StatisticalComparisonUI />
         </div>
     )
 }

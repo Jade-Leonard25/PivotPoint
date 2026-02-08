@@ -1,3 +1,4 @@
+
 import '../globals.css'
 import * as React from 'react';
 export const metadata ={
@@ -6,7 +7,7 @@ export const metadata ={
 }
 export default function DashboardLayout({children}){
     return(
-        <div className='flex'>
+        <div className='flex' suppressHydrationWarning={true}>
             {children}
         </div>
     )
